@@ -9,11 +9,9 @@ end
 
 post '/register' do
   begin
-    Stripe::Charge.create(
-      :amount       => 4200,
-      :currency     => 'usd',
-      :card         => params[:stripeToken],
-      :description  => 'Conference pass for TE Emerge'
+    Stripe::Customer.create(
+      :plan => 'emerge',
+      :card => params[:stripeToken]
     )
   rescue Stripe::StripeError => error
     redirect to('/')
