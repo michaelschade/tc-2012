@@ -1,0 +1,63 @@
+This presentation and code was written for the [Stripe](https://stripe.com/)
+API workshop at the TechCrunch Disrupt 2012 Hackathon.
+
+Getting Started
+===============
+
+To start running this project, you'll want to update `site.rb` (and
+`views/index.erb`, if trying earlier stages of the project) with your own API
+keys.
+
+This project is built by a basic Sinatra application, so you can get started by
+running:
+
+    bundle install
+    bundle exec ruby site.rb
+
+If you'd like to see your changes take effect immediately, then try running the
+server with *rerun*:
+
+    bundle exec rerun site.rb
+
+Tags
+====
+
+The code has been broken up into several milestones (each its own demo during
+the presentation); you can access these through tags (e.g., *git checkout v0*):
+
+* v0 -- Single page, static website for TE Emerge
+* v1 -- Accept one-time payments via Stripe
+* v2 -- Annual subscription to TE Emerge
+* v3 -- Webhooks for interesting notifications
+* v4 -- Demo of Stripe applications beta
+
+Resources
+=========
+
+We offer a [short series of tutorials](https://stripe.com/docs) to help you
+accept your first payment through Stripe in just a few, simple steps.
+
+All API objects and calls can be found in our [API
+documentation](https://stripe.com/docs/api), and your API keys can be found in
+your [account settings](https://manage.stripe.com/#account/apikeys).
+
+You can also get help through [Stripe Answers](https://answers.stripe.com/)
+(our public Q&A site), our [community chat](https://stripe.com/chat), and by
+emailing us directly at [support@stripe.com](mailto:support@stripe.com).
+
+Testing webhooks
+----------------
+
+[Jeff Lindsay](https://twitter.com/progrium) has written two tools that are
+very helpful for testing webhooks:
+
+* [localtunnel](http://localtunnel.com/) -- make your local machine accessible
+to the web
+* [RequestBin](http://requestb.in) -- inspect HTTP requests
+
+Debugging API Calls
+-------------------
+
+Your Stripe dashboard offers [logs](https://manage.stripe.com/#logs) so that
+you can see all API requests and responses. This is a great way to see how your
+app is interacting with Stripe without changing a single line of code.
