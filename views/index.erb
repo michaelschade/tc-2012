@@ -8,7 +8,7 @@
   <script type="text/javascript" src="https://js.stripe.com/v1/"></script>
 
   <script type="text/javascript">
-    Stripe.setPublishableKey('pk_0JzIVLeGKbBcwSVO15nlnN6wsT66F');
+    Stripe.setPublishableKey('<%= @publishable_key %>');
 
     function stripeResponseHandler(status, response) {
         if (response.error) {
@@ -40,6 +40,10 @@
 
 <body class="container">
   <form action="/register" method="POST" id="payment-form">
+      <% if params[:event] %>
+        <input name="event" value="<%= params[:event] %>" type="hidden" />
+      <% end %>
+
       <div class="four columns">
         <label>Card Number</label>
         <input type="text" size="20" autocomplete="off" id="card-number"/>

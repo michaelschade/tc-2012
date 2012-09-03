@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>TE</title>
+
+  <link href="base.css" rel="stylesheet" />
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
+</head>
+
+<body class="container">
+  <% if !session[:event_name] %>
+    <h1>So, you want your own event?</h1>
+    <p>We've learned a lot about how to make registering for events painless, and
+    would like to share this system with you. To get started, just create a new
+    (or connect your existing) Stripe account:</p>
+    <br>
+
+    <form action="/host" method="POST">
+      <label>Event Name</label>
+      <input name="event_name" type="text" />
+
+      <button type="submit">Connect with Stripe</button>
+    </form>
+  <% else %>
+    <h1>Congratulations!</h1>
+    <p>Your attendees can start registering right away by visiting <a href="/?event=<%= session[:event_name] %>">your signup page.</a></p>
+  <% end %>
+</body>
+</html>
