@@ -5,8 +5,60 @@
 
   <link href="base.css" rel="stylesheet" />
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
+  <script type="text/javascript" src="https://js.stripe.com/v1/"></script>
+
+  <script type="text/javascript">
+    Stripe.setPublishableKey('pk_0JzIVLeGKbBcwSVO15nlnN6wsT66F');
+
+    function stripeResponseHandler(status, response) {
+        if (response.error) {
+            $("#payment-errors").text(response.error.message);
+            $("#submit-button").removeAttr('disabled');
+        } else {
+            var form$ = $("#payment-form");
+            var token = response['id'];
+            form$.append("<input type='hidden' name='stripeToken' value='" + token + "'/>");
+            form$.get(0).submit();
+        }
+    }
+
+    $(document).ready(function() {
+        $("#payment-form").submit(function(event) {
+            $('#submit-button').attr('disabled', 'disabled');
+
+            Stripe.createToken({
+                number: $('#card-number').val(),
+                cvc: $('#card-cvc').val(),
+                exp_month: $('#card-expiry-month').val(),
+                exp_year: $('#card-expiry-year').val()
+            }, stripeResponseHandler);
+            return false;
+        });
+    });
+  </script>
 </head>
 
 <body class="container">
+  <form action="/register" method="POST" id="payment-form">
+      <div class="four columns">
+        <label>Card Number</label>
+        <input type="text" size="20" autocomplete="off" id="card-number"/>
+
+        <label>CVC</label>
+        <input type="text" size="4" autocomplete="off" id="card-cvc"/>
+
+        <p id="payment-errors"></p>
+      </div>
+
+      <div class="four columns">
+        <label>Expiration Month (MM)</label>
+        <input type="text" size="2" id="card-expiry-month"/>
+
+        <label>Expiration Year (YYYY)</label>
+        <input type="text" size="4" id="card-expiry-year"/>
+
+        <button id="submit-button" class="full-width" type="submit">Register</button>
+      </div>
+  </form>
 </body>
 </html>
