@@ -1,5 +1,6 @@
 require 'sinatra'
 require 'stripe'
+require 'json'
 
 Stripe.api_key = 'sk_0JzIVHOD3WeYgfMnsLGQy7vu9MoVh'
 
@@ -18,4 +19,11 @@ post '/register' do
   end
 
   erb :registered
+end
+
+# Phase 3: we add webhooks; talk about how these can be useful
+post '/webhooks/stripe' do
+  event_json = JSON.parse(request.body.read)
+  event = Stripe::Event.retrieve(event_json['id'])
+  puts event.inspect
 end
