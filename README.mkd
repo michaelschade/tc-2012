@@ -19,6 +19,10 @@ server with *rerun*:
 
     bundle exec rerun site.rb
 
+For the current version, you also need to be running a [redis](http//redis.io/)
+server. To bootstrap the database, you should visit the application's [host
+page](http://localhost:4567/host) and create an 'emerge' project.
+
 Tags
 ====
 
